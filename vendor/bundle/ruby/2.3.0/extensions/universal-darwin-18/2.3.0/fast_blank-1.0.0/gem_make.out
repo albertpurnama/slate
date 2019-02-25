@@ -1,0 +1,12 @@
+current directory: /Users/albertpurnama/Documents/UCSD/135-WI19/slate/vendor/bundle/ruby/2.3.0/gems/fast_blank-1.0.0/ext/fast_blank
+/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin/ruby -r ./siteconf20190224-59385-cn5yrf.rb extconf.rb
+creating Makefile
+
+current directory: /Users/albertpurnama/Documents/UCSD/135-WI19/slate/vendor/bundle/ruby/2.3.0/gems/fast_blank-1.0.0/ext/fast_blank
+make "DESTDIR=" clean
+
+current directory: /Users/albertpurnama/Documents/UCSD/135-WI19/slate/vendor/bundle/ruby/2.3.0/gems/fast_blank-1.0.0/ext/fast_blank
+make "DESTDIR="
+make: *** No rule to make target `/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/include/ruby-2.3.0/universal-darwin18/ruby/config.h', needed by `fast_blank.o'.  Stop.
+
+make failed, exit code 2
