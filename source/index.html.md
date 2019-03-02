@@ -9,7 +9,10 @@ toc_footers:
   - <a href='#'>Documentation Powered by Infinity Stones</a>
 
 includes:
+  - database
+  - bcc
   - logs
+  - errors
 
 search: true
 ---
@@ -68,6 +71,7 @@ Endgame expects for the API key to be included in all API requests to the server
 
 `Authorization: thanosrocks`
 
-<aside class="notice">
+<!-- <aside class="notice">
 You must replace <code>thanosrocks</code> with your personal API key.
-</aside>
+</aside> -->
+<aside class="notice"> Authentication still in development mode. You do not need to use Authorization header to use the API endpoints </aside>

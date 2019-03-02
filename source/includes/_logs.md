@@ -34,13 +34,15 @@ This endpoint retrieves raw JSON formatted logs.
 
 ### HTTP Request
 
-`GET "http://http://167.99.164.204/api/v1/analytics/logs/<limit>"`
+`GET /api/v1/analytics/logs`
 
 
 ### URL Parameters
 Parameter | Description
 --------- | -----------
 limit | the latest `limit` logs, max=500
+
+<aside class="notice"> The limit parameters are still in development, please do not input any parameters in the URL </aside>
 
 ## Post logs
 
@@ -67,8 +69,7 @@ This endpoint receive logs that is sent from the user client.
 
 ### HTTP Request
 
-`POST "http://http://167.99.164.204/api/v1/analytics/logs/"`
-
+`POST /api/v1/analytics/logs`
 
 ### Query Parameters
 Parameter | Description

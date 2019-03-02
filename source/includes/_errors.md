@@ -1,22 +1,88 @@
 # Errors
 
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
+Errors are the logs that is sent from the client when window.onerror is invoked.
+There are several ways that can result in errors like this.
 
-The Kittn API uses the following error codes:
+1. The client tried to access inaccessible memory location
+2. Bad code in the client app
 
+The endpoint responsible for handling the errors from the clients is /analytics/errors
 
-Error Code | Meaning
----------- | -------
-400 | Bad Request -- Your request is invalid.
-401 | Unauthorized -- Your API key is wrong.
-403 | Forbidden -- The kitten requested is hidden for administrators only.
-404 | Not Found -- The specified kitten could not be found.
-405 | Method Not Allowed -- You tried to access a kitten with an invalid method.
-406 | Not Acceptable -- You requested a format that isn't json.
-410 | Gone -- The kitten requested has been removed from our servers.
-418 | I'm a teapot.
-429 | Too Many Requests -- You're requesting too many kittens! Slow down!
-500 | Internal Server Error -- We had a problem with our server. Try again later.
-503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.
+## Get Errors
+
+```shell
+  curl "http://167.99.164.204/api/v1/analytics/error"
+    -X "GET"
+    -H "Authorization: thanosrocks"
+```
+
+```javascript
+  fetch("http://167.99.164.204/api/v1/analytics/error")
+    .then(data => data.json())
+    .then(d => {
+      // process data here
+      console.log(d);
+    })
+```
+
+> The above command returns JSON structured like this:
+
+```json
+  [
+    {
+      "timestamp": "Mon, 25 Feb 2019 08:15:15 GMT",
+      "session_id": 123,
+      "code": 101,
+      "severity": "FATAL",
+      "msg": "Mon, 25 Feb 2019 08:15:15 GMT: FATAL code 101 unable to render proper information"
+    },
+  ]
+```
+
+This endpoint list the errors that is logged from the server, ordered by the timestamp from the latest to the earliest errors.
+
+### HTTP Request
+
+`GET /api/v1/analytics/error`
+
+## Post Errors
+
+This endpoint receives the errors sent from the client and stores it to the database.
+Please note that the error messages is parsed directly from `window.onerror` function.
+
+```shell
+  curl "http://167.99.164.204/api/v1/analytics/error"
+    -X "POST"
+    -H "Authorization: thanosrocks"
+    -d "Thu, 28 Feb 2019 22:46:59 GMT on file http://167.99.164.204/testsite/ line 20 col 11: Uncaught ReferenceError: boom is not defined"
+```
+
+```javascript
+  fetch("http://167.99.164.204/api/v1/analytics/error", {
+    method: "POST",
+    body: "Thu, 28 Feb 2019 22:46:59 GMT on file http://167.99.164.204/testsite/ line 20 col 11: Uncaught ReferenceError: boom is not defined",
+  })
+    .then(data => data.json())
+    .catch(err => {
+      // retries here
+    })
+```
+
+> The above command returns JSON structured like this:
+
+```json
+  [
+    {
+      "timestamp": "Mon, 25 Feb 2019 08:15:15 GMT",
+      "session_id": 123,
+      "code": 101,
+      "severity": "FATAL",
+      "msg": "Thu, 28 Feb 2019 22:46:59 GMT on file http://167.99.164.204/testsite/ line 20 col 11: Uncaught ReferenceError: boom is not defined"
+    },
+  ]
+```
+
+### HTTP Request
+
+`POST /api/v1/analytics/error`
+
